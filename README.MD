@@ -8,10 +8,12 @@ ViewPagerTable:
 ![ABC](device-2015-12-11-170751.png)
 
 如何使用?:<br />
+
           /*初始化控件*/
           button_group=(ViewPagerTableBottomGroup)findViewById(R.id.button_group);//底部选择器
           tableHost=(ViewPagerTable)findViewById(R.id.tablehost);//内容ViewPager
-          /*设置ViewPager4个内容页面（个数任意），*/
+          
+          /*设置ViewPager4个内容页面（个数任意）*/
           tableHost.setViewLayout(R.layout.root0,R.layout.root1,R.layout.root2,R.layout.root3);
 
           /*底部选择器选择状态改变侦听*/
