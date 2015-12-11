@@ -1,6 +1,7 @@
 package com.cry.viewpagertable;
 
 import android.content.Context;
+import android.os.Build;
 import android.util.AttributeSet;
 import android.view.View;
 import android.view.ViewGroup;
@@ -109,7 +110,9 @@ public class ViewPagerTableBottomGroup extends LinearLayout{
                 int id = child.getId();
                 // generates an id if it's missing
                 if (id == View.NO_ID) {
-                    id = View.generateViewId();
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
+                        id = View.generateViewId();
+                    }
                     child.setId(id);
                 }
 

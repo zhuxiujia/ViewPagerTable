@@ -5,8 +5,8 @@
         <attr name="colorUp" format="color|integer"/>
         <attr name="drawable_down" format="reference"></attr>
         <attr name="drawable_up" format="reference"></attr>
-        <attr name="topimageview_id" format="reference"></attr>
-        <attr name="bottomimageview_id" format="reference"></attr>
+        <attr name="imageview_up_id" format="reference"></attr>
+        <attr name="imageview_down_id" format="reference"></attr>
         <attr name="textview_id" format="reference"></attr>
     </declare-styleable>
 </resources>

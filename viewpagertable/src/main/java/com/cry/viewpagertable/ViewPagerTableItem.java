@@ -18,8 +18,8 @@ import android.widget.TextView;
  */
 public class ViewPagerTableItem extends RelativeLayout{
     final String TAG = "ds";
-    private ImageView imageViewTop;
-    private ImageView imageViewBottom;
+    private ImageView imageView_up;
+    private ImageView imageView_down;
     private TextView textView;
     private boolean checked = false;
     private static int animation_time =600;
@@ -29,8 +29,8 @@ public class ViewPagerTableItem extends RelativeLayout{
     private int drawable_down = -1;
     private int drawable_up = -1;
 
-    private int id_imageView_top=-1;
-    private int id_imageView_bottom=-1;
+    private int id_imageView_up =-1;
+    private int id_imageView_down =-1;
     private int id_textView=-1;
 
     OnTouchUpListener onTouchUpListener=null;
@@ -76,8 +76,8 @@ public class ViewPagerTableItem extends RelativeLayout{
             clolor_up = a.getInt(R.styleable.ViewPagerTableItem_colorUp, 0xffccccff);
             drawable_down = a.getResourceId(R.styleable.ViewPagerTableItem_drawable_down, -1);
             drawable_up = a.getResourceId(R.styleable.ViewPagerTableItem_drawable_up, -1);
-            id_imageView_bottom=a.getResourceId(R.styleable.ViewPagerTableItem_bottomimageview_id,-1);
-            id_imageView_top=a.getResourceId(R.styleable.ViewPagerTableItem_topimageview_id,-1);
+            id_imageView_down =a.getResourceId(R.styleable.ViewPagerTableItem_imageview_down_id,-1);
+            id_imageView_up =a.getResourceId(R.styleable.ViewPagerTableItem_imageview_up_id,-1);
             id_textView=a.getResourceId(R.styleable.ViewPagerTableItem_textview_id,-1);
             a.recycle();
         } catch (Exception e) {
@@ -127,16 +127,16 @@ public class ViewPagerTableItem extends RelativeLayout{
         } catch (Exception e) {
         }
         try {
-            if (imageViewTop == null) {
-                imageViewTop = (ImageView) this.findViewById(id_imageView_top);
-                imageViewTop.setImageResource(drawable_up);
+            if (imageView_up == null) {
+                imageView_up = (ImageView) this.findViewById(id_imageView_up);
+                imageView_up.setImageResource(drawable_up);
             }
         } catch (Exception e) {
         }
         try {
-            if (imageViewBottom == null) {
-                imageViewBottom = (ImageView) this.findViewById(id_imageView_bottom);
-                imageViewBottom.setImageResource(drawable_down);
+            if (imageView_down == null) {
+                imageView_down = (ImageView) this.findViewById(id_imageView_down);
+                imageView_down.setImageResource(drawable_down);
             }
         } catch (Exception e) {
         }
@@ -147,12 +147,12 @@ public class ViewPagerTableItem extends RelativeLayout{
         try {
             if (checked) {
                 textView.setTextColor(clolor_down);
-                imageViewTop.setAlpha(0f);
-                imageViewBottom.setAlpha(1f);
+                imageView_up.setAlpha(0f);
+                imageView_down.setAlpha(1f);
             } else {
                 textView.setTextColor(clolor_up);
-                imageViewTop.setAlpha(1f);
-                imageViewBottom.setAlpha(0f);
+                imageView_up.setAlpha(1f);
+                imageView_down.setAlpha(0f);
             }
         }catch (Exception e){}
     }
@@ -183,11 +183,11 @@ public class ViewPagerTableItem extends RelativeLayout{
 
     private void DrawableAnimation(boolean checked) {
        if(checked){
-           ObjectAnimator.ofFloat(imageViewTop,"alpha",1,0).setDuration(animation_time).start();
-           ObjectAnimator.ofFloat(imageViewBottom,"alpha",0,1).setDuration(animation_time).start();
+           ObjectAnimator.ofFloat(imageView_up,"alpha",1,0).setDuration(animation_time).start();
+           ObjectAnimator.ofFloat(imageView_down,"alpha",0,1).setDuration(animation_time).start();
        }else {
-           ObjectAnimator.ofFloat(imageViewTop,"alpha",0,1).setDuration(animation_time).start();
-           ObjectAnimator.ofFloat(imageViewBottom,"alpha",1,0).setDuration(animation_time).start();
+           ObjectAnimator.ofFloat(imageView_up,"alpha",0,1).setDuration(animation_time).start();
+           ObjectAnimator.ofFloat(imageView_down,"alpha",1,0).setDuration(animation_time).start();
        }
     }
 
@@ -244,20 +244,20 @@ public class ViewPagerTableItem extends RelativeLayout{
         return checked;
     }
 
-    public ImageView getImageViewBottom() {
-        return imageViewBottom;
+    public ImageView getImageView_down() {
+        return imageView_down;
     }
 
-    public void setImageViewBottom(ImageView imageViewBottom) {
-        this.imageViewBottom = imageViewBottom;
+    public void setImageView_down(ImageView imageView_down) {
+        this.imageView_down = imageView_down;
     }
 
-    public ImageView getImageViewTop() {
-        return imageViewTop;
+    public ImageView getImageView_up() {
+        return imageView_up;
     }
 
-    public void setImageViewTop(ImageView imageViewTop) {
-        this.imageViewTop = imageViewTop;
+    public void setImageView_up(ImageView imageView_up) {
+        this.imageView_up = imageView_up;
     }
 
     public OnTouchUpListener getOnTouchUpListener() {

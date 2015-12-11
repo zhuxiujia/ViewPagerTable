@@ -8,8 +8,8 @@
     ViewPagerTableItem:colorUp="0xffcccccc"
     ViewPagerTableItem:drawable_down="@mipmap/ic_launcher"
     ViewPagerTableItem:drawable_up="@mipmap/ic_launcher2"
-    ViewPagerTableItem:topimageview_id="@+id/top"
-    ViewPagerTableItem:bottomimageview_id="@+id/bottom"
+    ViewPagerTableItem:imageview_up_id="@+id/top"
+    ViewPagerTableItem:imageview_down_id="@+id/bottom"
     ViewPagerTableItem:textview_id="@+id/textView"
     >
     <FrameLayout

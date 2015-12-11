@@ -52,8 +52,8 @@ public class MainActivity extends Activity {
 
     /*取内部ImageView功能举例*/
     private void getLocalImageView(){
-        table_bottom_group.getViewPagerTableItems().get(0).getImageViewTop().setImageResource(R.mipmap.ic_launcher);
+        table_bottom_group.getViewPagerTableItems().get(0).getImageView_up().setImageResource(R.mipmap.ic_launcher);
         /*如果你不满足或者说配置一个底部图片皮肤什么的，可以使用其他图片框架display 内部ImageView*/
-        //例如Picasso框架：Picasso.display(table_bottom_group.getViewPagerTableItems().get(0).getImageViewTop(),"http:www.abc.aa/a.png.....");
+        //例如Picasso框架：Picasso.display(table_bottom_group.getViewPagerTableItems().get(0).getImageView_up(),"http:www.abc.aa/a.png.....");
     }
 }
