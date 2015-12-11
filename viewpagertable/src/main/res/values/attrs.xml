@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="ViewPagerTableItem">
+        <attr name="clolordown" format="color|integer"/>
+        <attr name="colorUp" format="color|integer"/>
+        <attr name="drawable_down" format="reference"></attr>
+        <attr name="drawable_up" format="reference"></attr>
+        <attr name="topimageview_id" format="reference"></attr>
+        <attr name="bottomimageview_id" format="reference"></attr>
+        <attr name="textview_id" format="reference"></attr>
+    </declare-styleable>
+</resources>
