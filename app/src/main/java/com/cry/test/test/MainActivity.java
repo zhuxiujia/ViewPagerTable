@@ -11,19 +11,19 @@ import com.cry.viewpagertable.ViewPagerTableItem;
 
 public class MainActivity extends Activity {
     ViewPagerTable tableHost;
-    ViewPagerTableBottomGroup button_group;
+    ViewPagerTableBottomGroup table_bottom_group;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         /*初始化控件*/
-        button_group=(ViewPagerTableBottomGroup)findViewById(R.id.button_group);//底部选择器
+        table_bottom_group =(ViewPagerTableBottomGroup)findViewById(R.id.button_group);//底部选择器
         tableHost=(ViewPagerTable)findViewById(R.id.tablehost);//内容ViewPager
         /*设置ViewPager4个内容页面（个数任意），*/
         tableHost.setViewLayout(R.layout.root0,R.layout.root1,R.layout.root2,R.layout.root3);
 
         /*底部选择器选择状态改变侦听*/
-        button_group.setOnViewPagerTableGroupChangeListener(new ViewPagerTableBottomGroup.OnViewPagerTableGroupChangeListener() {
+        table_bottom_group.setOnViewPagerTableGroupChangeListener(new ViewPagerTableBottomGroup.OnViewPagerTableGroupChangeListener() {
             @Override
             public void onGroupChange(int index) {
                 tableHost.setCurrentItem(index);//设置ViewPager页面切换
@@ -38,7 +38,7 @@ public class MainActivity extends Activity {
 
             @Override
             public void onPageSelected(int position) {
-                 button_group.setChildChecked(position);
+                 table_bottom_group.setChildChecked(position);
             }
 
             @Override
@@ -47,5 +47,13 @@ public class MainActivity extends Activity {
             }
         });
         ViewPagerTableItem.setAnimation_time(600);//底部选择器动画时间
+    }
+
+
+    /*取内部ImageView功能举例*/
+    private void getLocalImageView(){
+        table_bottom_group.getViewPagerTableItems().get(0).getImageViewTop().setImageResource(R.mipmap.ic_launcher);
+        /*如果你不满足或者说配置一个底部图片皮肤什么的，可以使用其他图片框架display 内部ImageView*/
+        //例如Picasso框架：Picasso.display(table_bottom_group.getViewPagerTableItems().get(0).getImageViewTop(),"http:www.abc.aa/a.png.....");
     }
 }

@@ -1,0 +1,40 @@
+<com.cry.viewpagertable.ViewPagerTableItem
+    xmlns:ViewPagerTableItem="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:layout_weight="1"
+    ViewPagerTableItem:clolordown="0xff8bbf51"
+    ViewPagerTableItem:colorUp="0xffcccccc"
+    ViewPagerTableItem:drawable_down="@mipmap/ic_launcher"
+    ViewPagerTableItem:drawable_up="@mipmap/ic_launcher2"
+    ViewPagerTableItem:topimageview_id="@+id/top"
+    ViewPagerTableItem:bottomimageview_id="@+id/bottom"
+    ViewPagerTableItem:textview_id="@+id/textView"
+    >
+    <FrameLayout
+        android:id="@+id/frame"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_centerHorizontal="true">
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/ic_launcher"
+            android:id="@+id/top"
+            />
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/ic_launcher"
+            android:id="@+id/bottom"
+            />
+    </FrameLayout>
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/frame"
+        android:text="what" />
+</com.cry.viewpagertable.ViewPagerTableItem>
