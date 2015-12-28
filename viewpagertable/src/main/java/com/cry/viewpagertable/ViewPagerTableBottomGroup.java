@@ -54,7 +54,7 @@ public class ViewPagerTableBottomGroup extends LinearLayout{
 
 
     public void setChildChecked(int index){
-        if(index< viewPagerTableItems.size())
+        if(index< viewPagerTableItems.size()){
             for (int i = 0; i < viewPagerTableItems.size(); i++) {
                 if (i == index) {
                     viewPagerTableItems.get(i).setChecked(true);
@@ -64,6 +64,8 @@ public class ViewPagerTableBottomGroup extends LinearLayout{
                     //Log.i(TAG,"false:"+index);
                 }
             }
+            if(onViewPagerTableGroupChangeListener!=null)onViewPagerTableGroupChangeListener.onGroupChange(index);
+        }
     }
 
     public List<ViewPagerTableItem> getViewPagerTableItems() {
@@ -101,7 +103,6 @@ public class ViewPagerTableBottomGroup extends LinearLayout{
                     @Override
                     public void onTouchUp() {
                         setChildChecked(p);
-                        if(onViewPagerTableGroupChangeListener!=null)onViewPagerTableGroupChangeListener.onGroupChange(p);
                     }
                 });
                 index++;
