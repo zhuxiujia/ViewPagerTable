@@ -4,7 +4,6 @@ import android.content.Context;
 import android.os.Build;
 import android.util.AttributeSet;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
 import java.util.ArrayList;
@@ -45,10 +44,6 @@ public class ViewPagerTableBottomGroup extends LinearLayout{
     @Override
     protected void onLayout(boolean changed, int l, int t, int r, int b) {
         super.onLayout(changed, l, t, r, b);
-        if(changed){
-//            findAllItem();
-            setChildChecked(0);
-        }
     }
 
 
@@ -56,23 +51,7 @@ public class ViewPagerTableBottomGroup extends LinearLayout{
         this.onViewPagerTableGroupChangeListener = onViewPagerTableGroupChangeListener;
     }
 
-    private void findAllItem(){
-        viewPagerTableItems.clear();
-        for (int i=0;i<getChildCount();i++){
-            if(getChildAt(i).getClass()==ViewPagerTableItem.class){
-                final int p=i;
-                viewPagerTableItems.add((ViewPagerTableItem) getChildAt(p));
-                viewPagerTableItems.get(p).setOnTouchUpListener(new ViewPagerTableItem.OnTouchUpListener() {
-                    @Override
-                    public void onTouchUp() {
-                        setChildChecked(p);
-                        if(onViewPagerTableGroupChangeListener!=null)onViewPagerTableGroupChangeListener.onGroupChange(p);
-                    }
-                });
-            }
-        }
-        //Log.i(TAG,"count "+viewPagerTableItems.size());
-    }
+
 
     public void setChildChecked(int index){
         if(index< viewPagerTableItems.size())
@@ -100,7 +79,7 @@ public class ViewPagerTableBottomGroup extends LinearLayout{
      * hierarchy change listener without preventing the user to setup his.</p>
      */
     private class PassThroughHierarchyChangeListener implements
-            ViewGroup.OnHierarchyChangeListener {
+            OnHierarchyChangeListener {
         int index=0;
         /**
          * {@inheritDoc}
@@ -126,6 +105,7 @@ public class ViewPagerTableBottomGroup extends LinearLayout{
                     }
                 });
                 index++;
+                if(p==0){viewPagerTableItems.get(0).setChecked(true);}
             }
 
 
