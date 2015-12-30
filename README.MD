@@ -1,13 +1,13 @@
 #ViewPagerTable介绍:<br />
-1功能上优势：：4步一键完成app的主页面分页，支持任意个数的页面<br />
-2极大的简化了大家配置TableHost等分页的繁琐代码，而且本框架可以使用其他图片框架display底部导航图片（方便自己配置皮肤什么的）
-3动画-底部导航器默认有透明度渐变动画和（TextView）颜色渐变动画
+####1功能上优势:只需2步完成app的主页面分页，支持任意个数的页面，配置底部按钮图片，动画等等<br />
+####2极大的简化了大家配置TableHost等分页的繁琐代码，而且本框架可以使用其他图片框架display底部导航图片（方便自己配置皮肤什么的）
+####3动画-底部导航器默认有透明度渐变动画和（TextView）颜色渐变动画
+####4继承安卓基础控件开发，兼容性好
+[点击下载aar文件,eclipse要解压,AndroidStudio直接导入aar](https://github.com/zhuxiujia/ViewPagerTable/blob/master/viewpagertable-release.aar?raw=true)
 ![ABC](device-2015-12-11-170751.png)
-##直接下载aar文件：
-[点击下载aar文件](https://github.com/zhuxiujia/ViewPagerTable/viewpagertable-release.aar)
 ##如何使用?（具体请下载demo和库）:<br />
 
-###Step1:         /*配置xml布局内容*/
+###Step1:/*配置xml布局内容*/
                  <com.cry.viewpagertable.ViewPagerTable
                          android:id="@+id/tablehost"
                         />
