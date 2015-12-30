@@ -14,6 +14,7 @@ import java.util.List;
  * Created by zxj on 15/12/10.
  */
 public class ViewPagerTable extends ViewPager{
+    public static Config config=new Config();
   final   ViewGroup.LayoutParams layoutparams= new ViewGroup.LayoutParams(ViewGroup.LayoutParams.FILL_PARENT, ViewGroup.LayoutParams.FILL_PARENT);
     ViewPagerTableAdapter viewPagerTableAdapter =new ViewPagerTableAdapter();
     public ViewPagerTable(Context context) {
@@ -29,7 +30,9 @@ public class ViewPagerTable extends ViewPager{
     private void init() {
         setAdapter(viewPagerTableAdapter);
     }
-
+    public void setConfig(Config config){
+        ViewPagerTable.config=config;
+    }
 
     public void setViewLayout(int... layouts){
         viewPagerTableAdapter.getViewList().clear();

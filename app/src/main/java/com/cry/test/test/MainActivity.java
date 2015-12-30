@@ -7,7 +7,6 @@ import android.support.v4.view.ViewPager;
 import com.cry.test.R;
 import com.cry.viewpagertable.ViewPagerTable;
 import com.cry.viewpagertable.ViewPagerTableBottomGroup;
-import com.cry.viewpagertable.ViewPagerTableItem;
 
 public class MainActivity extends Activity {
     ViewPagerTable tableHost;
@@ -46,7 +45,10 @@ public class MainActivity extends Activity {
 
             }
         });
-        ViewPagerTableItem.setAnimation_time(600);//底部选择器动画时间
+
+        /*配置选项示例*/
+        ViewPagerTable.config.animation_time=600;//底部选择器动画时间
+        ViewPagerTable.config.enable_tableItemAnimation =true;//允许过渡动画
     }
 
 

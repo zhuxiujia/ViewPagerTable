@@ -22,7 +22,6 @@ public class ViewPagerTableItem extends RelativeLayout{
     private ImageView imageView_down;
     private TextView textView;
     private boolean checked = false;
-    private static int animation_time =600;
 
     private int clolor_down = 0xff0000ff;
     private int clolor_up = 0xffccccff;
@@ -168,13 +167,8 @@ public class ViewPagerTableItem extends RelativeLayout{
 
     public void invate() {
         try {
-            if (checked) {
-                ColorAnimation(clolor_up, clolor_down);
+                ColorAnimation(checked);
                 DrawableAnimation(checked);
-            } else {
-                ColorAnimation(clolor_down, clolor_up);
-                DrawableAnimation(checked);
-            }
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -182,32 +176,46 @@ public class ViewPagerTableItem extends RelativeLayout{
     }
 
     private void DrawableAnimation(boolean checked) {
-       if(checked){
-           ObjectAnimator.ofFloat(imageView_up,"alpha",1,0).setDuration(animation_time).start();
-           ObjectAnimator.ofFloat(imageView_down,"alpha",0,1).setDuration(animation_time).start();
-       }else {
-           ObjectAnimator.ofFloat(imageView_up,"alpha",0,1).setDuration(animation_time).start();
-           ObjectAnimator.ofFloat(imageView_down,"alpha",1,0).setDuration(animation_time).start();
-       }
-    }
-
-    private void ColorAnimation(int form, int to) {
-        Integer colorFrom = form;
-        Integer colorTo = to;
-        ValueAnimator colorAnimation = ValueAnimator.ofObject(new ArgbEvaluator(), colorFrom, colorTo);
-        colorAnimation.setDuration(animation_time);
-        colorAnimation.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
-            @Override
-            public void onAnimationUpdate(ValueAnimator animation) {
-                textView.setTextColor((Integer) animation.getAnimatedValue());
+        if(ViewPagerTable.config.enable_tableItemAnimation) {
+            if (checked) {
+                ObjectAnimator.ofFloat(imageView_up, "alpha", 1, 0).setDuration(ViewPagerTable.config.animation_time).start();
+                ObjectAnimator.ofFloat(imageView_down, "alpha", 0, 1).setDuration(ViewPagerTable.config.animation_time).start();
+            } else {
+                ObjectAnimator.ofFloat(imageView_up, "alpha", 0, 1).setDuration(ViewPagerTable.config.animation_time).start();
+                ObjectAnimator.ofFloat(imageView_down, "alpha", 1, 0).setDuration(ViewPagerTable.config.animation_time).start();
             }
-        });
-        colorAnimation.start();
+        }else {
+            if (checked) {
+                imageView_up.setAlpha(0f);
+                imageView_down.setAlpha(1f);
+            } else {
+                imageView_up.setAlpha(1f);
+                imageView_down.setAlpha(0f);
+            }
+        }
     }
 
+    private void ColorAnimation(boolean checked) {
+        Integer colorFrom;
+        Integer colorTo;
+        if(checked){colorFrom=clolor_up;colorTo=clolor_down;
+        }else { colorFrom=clolor_down;colorTo=clolor_up;}
 
+        if(ViewPagerTable.config.enable_tableItemAnimation) {
+            ValueAnimator colorAnimation = ValueAnimator.ofObject(new ArgbEvaluator(), colorFrom, colorTo);
+            colorAnimation.setDuration(ViewPagerTable.config.animation_time);
+            colorAnimation.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+                @Override
+                public void onAnimationUpdate(ValueAnimator animation) {
+                    textView.setTextColor((Integer) animation.getAnimatedValue());
+                }
+            });
+            colorAnimation.start();
+        }else {
+            textView.setTextColor(colorTo);
+        }
+    }
     /*get set*/
-
     public int getDrawable_down() {
         return drawable_down;
     }
@@ -270,13 +278,5 @@ public class ViewPagerTableItem extends RelativeLayout{
 
     public void setTextView(TextView textView) {
         this.textView = textView;
-    }
-
-    public static void setAnimation_time(int animation_time) {
-        ViewPagerTableItem.animation_time = animation_time;
-    }
-
-    public static int getAnimation_time() {
-        return animation_time;
     }
 }
