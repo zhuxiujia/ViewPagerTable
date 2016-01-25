@@ -7,7 +7,7 @@
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:text="Page0"
-        android:id="@+id/textView"
+        android:id="@+id/textView_up"
         android:background="#ffcccc"
         android:layout_gravity="center_horizontal" />
 </LinearLayout>

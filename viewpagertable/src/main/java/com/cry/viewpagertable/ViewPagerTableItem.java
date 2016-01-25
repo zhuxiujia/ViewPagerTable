@@ -1,8 +1,6 @@
 package com.cry.viewpagertable;
 
-import android.animation.ArgbEvaluator;
 import android.animation.ObjectAnimator;
-import android.animation.ValueAnimator;
 import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.res.TypedArray;
@@ -17,20 +15,17 @@ import android.widget.TextView;
  * Created by zxj on 15/12/10.
  */
 public class ViewPagerTableItem extends RelativeLayout{
-    final String TAG = "ds";
+    final String TAG = getClass().getSimpleName();
     private ImageView imageView_up;
     private ImageView imageView_down;
-    private TextView textView;
+    private TextView textView_up;
+    private TextView textView_down;
     private boolean checked = false;
-
-    private int clolor_down = 0xff0000ff;
-    private int clolor_up = 0xffccccff;
-    private int drawable_down = -1;
-    private int drawable_up = -1;
 
     private int id_imageView_up =-1;
     private int id_imageView_down =-1;
-    private int id_textView=-1;
+    private int id_textView_up=-1;
+    private int id_textView_down=-1;
 
     OnTouchUpListener onTouchUpListener=null;
     OnCheckedChangeWidgetListener onCheckedChangeWidgetListener=null;
@@ -71,13 +66,10 @@ public class ViewPagerTableItem extends RelativeLayout{
     private void initAttrs(Context context, AttributeSet attrs) {
         try {
             TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.ViewPagerTableItem);
-            clolor_down = a.getInt(R.styleable.ViewPagerTableItem_clolordown, 0xff0000ff);
-            clolor_up = a.getInt(R.styleable.ViewPagerTableItem_colorUp, 0xffccccff);
-            drawable_down = a.getResourceId(R.styleable.ViewPagerTableItem_drawable_down, -1);
-            drawable_up = a.getResourceId(R.styleable.ViewPagerTableItem_drawable_up, -1);
             id_imageView_down =a.getResourceId(R.styleable.ViewPagerTableItem_imageview_down_id,-1);
             id_imageView_up =a.getResourceId(R.styleable.ViewPagerTableItem_imageview_up_id,-1);
-            id_textView=a.getResourceId(R.styleable.ViewPagerTableItem_textview_id,-1);
+            id_textView_up=a.getResourceId(R.styleable.ViewPagerTableItem_textview_up_id,-1);
+            id_textView_down=a.getResourceId(R.styleable.ViewPagerTableItem_textview_down_id,-1);
             a.recycle();
         } catch (Exception e) {
         }
@@ -120,22 +112,26 @@ public class ViewPagerTableItem extends RelativeLayout{
     /*多次调用，所以需要判断*/
     private void findAllChildViews() {
         try {
-            if (textView == null) {
-                textView = (TextView) this.findViewById(id_textView);
+            if (textView_up == null) {
+                textView_up = (TextView) this.findViewById(id_textView_up);
+            }
+        } catch (Exception e) {
+        }
+        try {
+            if (textView_down == null) {
+                textView_down = (TextView) this.findViewById(id_textView_down);
             }
         } catch (Exception e) {
         }
         try {
             if (imageView_up == null) {
                 imageView_up = (ImageView) this.findViewById(id_imageView_up);
-                imageView_up.setImageResource(drawable_up);
             }
         } catch (Exception e) {
         }
         try {
             if (imageView_down == null) {
                 imageView_down = (ImageView) this.findViewById(id_imageView_down);
-                imageView_down.setImageResource(drawable_down);
             }
         } catch (Exception e) {
         }
@@ -145,13 +141,17 @@ public class ViewPagerTableItem extends RelativeLayout{
     private void invateState() {
         try {
             if (checked) {
-                textView.setTextColor(clolor_down);
                 imageView_up.setAlpha(0f);
                 imageView_down.setAlpha(1f);
+
+                textView_up.setAlpha(0f);
+                textView_down.setAlpha(1f);
             } else {
-                textView.setTextColor(clolor_up);
                 imageView_up.setAlpha(1f);
                 imageView_down.setAlpha(0f);
+
+                textView_up.setAlpha(1f);
+                textView_down.setAlpha(0f);
             }
         }catch (Exception e){}
     }
@@ -167,15 +167,15 @@ public class ViewPagerTableItem extends RelativeLayout{
 
     public void invate() {
         try {
-                ColorAnimation(checked);
-                DrawableAnimation(checked);
+                TextViewAnimation(checked);
+                ImageViewAnimation(checked);
         } catch (Exception e) {
             e.printStackTrace();
         }
 
     }
 
-    private void DrawableAnimation(boolean checked) {
+    private void ImageViewAnimation(boolean checked) {
         if(ViewPagerTable.config.enable_tableItemAnimation) {
             if (checked) {
                 ObjectAnimator.ofFloat(imageView_up, "alpha", 1, 0).setDuration(ViewPagerTable.config.animation_time).start();
@@ -195,61 +195,60 @@ public class ViewPagerTableItem extends RelativeLayout{
         }
     }
 
-    private void ColorAnimation(boolean checked) {
-        Integer colorFrom;
-        Integer colorTo;
-        if(checked){colorFrom=clolor_up;colorTo=clolor_down;
-        }else { colorFrom=clolor_down;colorTo=clolor_up;}
-
+    private void TextViewAnimation(boolean checked) {
         if(ViewPagerTable.config.enable_tableItemAnimation) {
-            ValueAnimator colorAnimation = ValueAnimator.ofObject(new ArgbEvaluator(), colorFrom, colorTo);
-            colorAnimation.setDuration(ViewPagerTable.config.animation_time);
-            colorAnimation.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
-                @Override
-                public void onAnimationUpdate(ValueAnimator animation) {
-                    textView.setTextColor((Integer) animation.getAnimatedValue());
-                }
-            });
-            colorAnimation.start();
+            if (checked) {
+                ObjectAnimator.ofFloat(textView_up, "alpha", 1, 0).setDuration(ViewPagerTable.config.animation_time).start();
+                ObjectAnimator.ofFloat(textView_down, "alpha", 0, 1).setDuration(ViewPagerTable.config.animation_time).start();
+            } else {
+                ObjectAnimator.ofFloat(textView_up, "alpha", 0, 1).setDuration(ViewPagerTable.config.animation_time).start();
+                ObjectAnimator.ofFloat(textView_down, "alpha", 1, 0).setDuration(ViewPagerTable.config.animation_time).start();
+            }
         }else {
-            textView.setTextColor(colorTo);
+            if (checked) {
+                textView_up.setAlpha(0f);
+                textView_down.setAlpha(1f);
+            } else {
+                textView_up.setAlpha(1f);
+                textView_down.setAlpha(0f);
+            }
         }
-    }
-    /*get set*/
-    public int getDrawable_down() {
-        return drawable_down;
-    }
-
-    public void setDrawable_down(int drawable_down) {
-        this.drawable_down = drawable_down;
-    }
-
-    public int getDrawable_up() {
-        return drawable_up;
-    }
-
-    public void setDrawable_up(int drawable_up) {
-        this.drawable_up = drawable_up;
-    }
-
-    public int getClolor_up() {
-        return clolor_up;
-    }
-
-    public void setClolor_up(int clolor_up) {
-        this.clolor_up = clolor_up;
-    }
-
-    public int getClolor_down() {
-        return clolor_down;
-    }
-
-    public void setClolor_down(int clolor_down) {
-        this.clolor_down = clolor_down;
     }
 
     public boolean isChecked() {
         return checked;
+    }
+
+    public int getId_imageView_down() {
+        return id_imageView_down;
+    }
+
+    public void setId_imageView_down(int id_imageView_down) {
+        this.id_imageView_down = id_imageView_down;
+    }
+
+    public int getId_imageView_up() {
+        return id_imageView_up;
+    }
+
+    public void setId_imageView_up(int id_imageView_up) {
+        this.id_imageView_up = id_imageView_up;
+    }
+
+    public int getId_textView_down() {
+        return id_textView_down;
+    }
+
+    public void setId_textView_down(int id_textView_down) {
+        this.id_textView_down = id_textView_down;
+    }
+
+    public int getId_textView_up() {
+        return id_textView_up;
+    }
+
+    public void setId_textView_up(int id_textView_up) {
+        this.id_textView_up = id_textView_up;
     }
 
     public ImageView getImageView_down() {
@@ -268,15 +267,27 @@ public class ViewPagerTableItem extends RelativeLayout{
         this.imageView_up = imageView_up;
     }
 
+    public OnCheckedChangeWidgetListener getOnCheckedChangeWidgetListener() {
+        return onCheckedChangeWidgetListener;
+    }
+
     public OnTouchUpListener getOnTouchUpListener() {
         return onTouchUpListener;
     }
 
-    public TextView getTextView() {
-        return textView;
+    public TextView getTextView_down() {
+        return textView_down;
     }
 
-    public void setTextView(TextView textView) {
-        this.textView = textView;
+    public void setTextView_down(TextView textView_down) {
+        this.textView_down = textView_down;
+    }
+
+    public TextView getTextView_up() {
+        return textView_up;
+    }
+
+    public void setTextView_up(TextView textView_up) {
+        this.textView_up = textView_up;
     }
 }

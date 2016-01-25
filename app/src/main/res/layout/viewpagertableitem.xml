@@ -4,13 +4,10 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:layout_weight="1"
-    ViewPagerTableItem:clolordown="0xff8bbf51"
-    ViewPagerTableItem:colorUp="0xffcccccc"
-    ViewPagerTableItem:drawable_down="@mipmap/ic_launcher"
-    ViewPagerTableItem:drawable_up="@mipmap/ic_launcher2"
-    ViewPagerTableItem:imageview_up_id="@+id/top"
-    ViewPagerTableItem:imageview_down_id="@+id/bottom"
-    ViewPagerTableItem:textview_id="@+id/textView"
+    ViewPagerTableItem:imageview_up_id="@+id/imageView_up"
+    ViewPagerTableItem:imageview_down_id="@+id/imageView_down"
+    ViewPagerTableItem:textview_up_id="@+id/textView_up"
+    ViewPagerTableItem:textview_down_id="@+id/textView_down"
     >
     <FrameLayout
         android:id="@+id/frame"
@@ -21,20 +18,33 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@mipmap/ic_launcher"
-            android:id="@+id/top"
+            android:id="@+id/imageView_up"
             />
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@mipmap/ic_launcher"
-            android:id="@+id/bottom"
+            android:id="@+id/imageView_down"
             />
     </FrameLayout>
-    <TextView
-        android:id="@+id/textView"
+    <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:layout_below="@+id/frame"
-        android:text="what" />
+        android:layout_below="@+id/frame">
+        <TextView
+            android:id="@+id/textView_up"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="up" />
+        <TextView
+            android:id="@+id/textView_down"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:textColor="#ff8888"
+            android:text="down"
+            />
+    </RelativeLayout>
 </com.cry.viewpagertable.ViewPagerTableItem>

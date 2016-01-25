@@ -15,30 +15,54 @@
                          android:id="@+id/button_group"
                      >
                          <com.cry.viewpagertable.ViewPagerTableItem
-                             xmlns:ViewPagerTableItem="http://schemas.android.com/apk/res-auto"
-                             ViewPagerTableItem:clolordown="0xffff6f40"
-                             ViewPagerTableItem:colorUp="0xffcccccc"
-                             ViewPagerTableItem:drawable_down="@mipmap/ic_launcher"<!-- 按下图片 --!>
-                             ViewPagerTableItem:drawable_up="@mipmap/ic_launcher2"<!-- 抬起图片 --!>
-                             ViewPagerTableItem:topimageview_id="@+id/top"<!-- 指定Item的顶部ImageView id --!>
-                             ViewPagerTableItem:bottomimageview_id="@+id/bottom"<!-- 指定Item的底部ImageView id --!>
-                             ViewPagerTableItem:textview_id="@+id/textView"<!-- 指定Item的TextView id --!>
+                             xmlns:ViewPagerTableItem="http://schemas.android.com/apk/res-auto"             
+                              ViewPagerTableItem:imageview_up_id="@+id/imageView_up"<!-- 指定Item的抬起ImageView id --!>
+                                  ViewPagerTableItem:imageview_down_id="@+id/imageView_down"<!-- 指定Item的按下ImageView id --!>
+                                  ViewPagerTableItem:textview_up_id="@+id/textView_up"<!-- 指定Item抬起的TextView id --!>
+                                  ViewPagerTableItem:textview_down_id="@+id/textView_down"<!-- 指定Item按下的TextView id --!>
                              >
-                             <FrameLayout
-                                 >
-                                 <ImageView
-                                     android:id="@+id/top"
-                                     />
-                                 <ImageView
-                                     android:id="@+id/bottom"
-                                     />
-                             </FrameLayout>
-                             <TextView
-                                 android:id="@+id/textView"/>
+                              <FrameLayout
+                                     android:id="@+id/frame"
+                                     android:layout_width="40dp"
+                                     android:layout_height="40dp"
+                                     android:layout_centerHorizontal="true">
+                                     <ImageView
+                                         android:layout_width="wrap_content"
+                                         android:layout_height="wrap_content"
+                                         android:src="@mipmap/ic_launcher"
+                                         android:id="@+id/imageView_up"
+                                         />
+                                     <ImageView
+                                         android:layout_width="wrap_content"
+                                         android:layout_height="wrap_content"
+                                         android:src="@mipmap/ic_launcher"
+                                         android:id="@+id/imageView_down"
+                                         />
+                                 </FrameLayout>
+                                 <RelativeLayout
+                                     android:layout_width="wrap_content"
+                                     android:layout_height="wrap_content"
+                                     android:layout_centerHorizontal="true"
+                                     android:layout_below="@+id/frame">
+                                     <TextView
+                                         android:id="@+id/textView_up"
+                                         android:layout_width="wrap_content"
+                                         android:layout_height="wrap_content"
+                                         android:layout_centerInParent="true"
+                                         android:text="up" />
+                                     <TextView
+                                         android:id="@+id/textView_down"
+                                         android:layout_width="wrap_content"
+                                         android:layout_height="wrap_content"
+                                         android:layout_centerInParent="true"
+                                         android:textColor="#ff8888"
+                                         android:text="down"
+                                         />
+                                 </RelativeLayout>
                          </com.cry.viewpagertable.ViewPagerTableItem>
                          .
                          .
-                         .
+                         ...等等...
 
 
 
