@@ -3,10 +3,15 @@ package com.cry.test.test;
 import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
+import android.view.LayoutInflater;
+import android.view.View;
 
 import com.cry.test.R;
 import com.cry.viewpagertable.ViewPagerTable;
 import com.cry.viewpagertable.ViewPagerTableBottomGroup;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity extends Activity {
     ViewPagerTable tableHost;
@@ -19,8 +24,16 @@ public class MainActivity extends Activity {
         table_bottom_group =(ViewPagerTableBottomGroup)findViewById(R.id.button_group);//底部选择器
         tableHost=(ViewPagerTable)findViewById(R.id.tablehost);//内容ViewPager
         /*设置ViewPager4个内容页面（个数任意），*/
-        tableHost.setViewLayout(R.layout.root0,R.layout.root1,R.layout.root2,R.layout.root3);
-
+        View root0= LayoutInflater.from(this).inflate(R.layout.root0,null);
+        View root1= LayoutInflater.from(this).inflate(R.layout.root1,null);
+        View root2= LayoutInflater.from(this).inflate(R.layout.root2,null);
+        View root3= LayoutInflater.from(this).inflate(R.layout.root3,null);
+        List<View> views=new ArrayList<>();
+        views.add(root0);
+        views.add(root1);
+        views.add(root2);
+        views.add(root3);
+        tableHost.setViewLayout(views);
         /*底部选择器选择状态改变侦听*/
         table_bottom_group.setOnViewPagerTableGroupChangeListener(new ViewPagerTableBottomGroup.OnViewPagerTableGroupChangeListener() {
             @Override

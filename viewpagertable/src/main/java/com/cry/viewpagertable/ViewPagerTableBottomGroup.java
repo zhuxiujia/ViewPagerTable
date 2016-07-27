@@ -12,7 +12,7 @@ import java.util.List;
 /**
  * Created by zxj on 15/12/10.
  */
-public class ViewPagerTableBottomGroup extends LinearLayout{
+public class ViewPagerTableBottomGroup extends LinearLayout {
     final String TAG="Group";
     List<ViewPagerTableItem> viewPagerTableItems =new ArrayList<>();
     private void init() {

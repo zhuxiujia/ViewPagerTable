@@ -1,10 +1,11 @@
 package com.cry.viewpagertable;
 
 import android.content.Context;
-import android.support.v4.view.PagerAdapter;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.view.ViewPager;
 import android.util.AttributeSet;
-import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -15,8 +16,8 @@ import java.util.List;
  */
 public class ViewPagerTable extends ViewPager{
     public static Config config=new Config();
-  final   ViewGroup.LayoutParams layoutparams= new ViewGroup.LayoutParams(ViewGroup.LayoutParams.FILL_PARENT, ViewGroup.LayoutParams.FILL_PARENT);
-    ViewPagerTableAdapter viewPagerTableAdapter =new ViewPagerTableAdapter();
+   final   ViewGroup.LayoutParams layoutparams= new ViewGroup.LayoutParams(ViewGroup.LayoutParams.FILL_PARENT, ViewGroup.LayoutParams.FILL_PARENT);
+
     public ViewPagerTable(Context context) {
         super(context);
         init();
@@ -28,53 +29,38 @@ public class ViewPagerTable extends ViewPager{
     }
 
     private void init() {
-        setAdapter(viewPagerTableAdapter);
     }
     public void setConfig(Config config){
         ViewPagerTable.config=config;
     }
 
-    public void setViewLayout(int... layouts){
-        viewPagerTableAdapter.getViewList().clear();
-        viewPagerTableAdapter.notifyDataSetChanged();
-       for (int i=0;i<layouts.length;i++){
-           View view=LayoutInflater.from(getContext()).inflate(layouts[i],null);
-           view.setLayoutParams(layoutparams);
-           viewPagerTableAdapter.getViewList().add(view);
-       }
-        viewPagerTableAdapter.notifyDataSetChanged();
-    }
-    public void setViewLayout(View... layouts){
-        viewPagerTableAdapter.getViewList().clear();
-        viewPagerTableAdapter.notifyDataSetChanged();
-        for (int i=0;i<layouts.length;i++){
-            layouts[i].setLayoutParams(layoutparams);
-            viewPagerTableAdapter.getViewList().add(layouts[i]);
-        }
-        viewPagerTableAdapter.notifyDataSetChanged();
-    }
     public void setViewLayout(List<View> layouts){
-        viewPagerTableAdapter.getViewList().clear();
-        viewPagerTableAdapter.notifyDataSetChanged();
+        ViewPagerTableAdapter viewPagerTableAdapter =new ViewPagerTableAdapter();
+        setAdapter(viewPagerTableAdapter);
         viewPagerTableAdapter.setViewList(layouts);
         viewPagerTableAdapter.notifyDataSetChanged();
     }
-
-    public View getPagerView(int index){
-       return viewPagerTableAdapter.getViewList().get(index);
+    public void setViewLayoutFragment(FragmentManager fm, List<Fragment> layouts){
+        FragmentAdapter viewPagerTableAdapter =new FragmentAdapter(fm,layouts);
+        setAdapter(viewPagerTableAdapter);
+        viewPagerTableAdapter.notifyDataSetChanged();
     }
 
-    public List<View> getPagerViewList(){
-        return viewPagerTableAdapter.getViewList();
-    }
 
-    public ViewPagerTableAdapter getViewPagerTableAdapter() {
-        return viewPagerTableAdapter;
+    @Override
+    public boolean onTouchEvent(MotionEvent arg0) {
+        if (config.noScroll)
+            return false;
+        else
+            return super.onTouchEvent(arg0);
     }
 
     @Override
-    @Deprecated
-    public void setAdapter(PagerAdapter adapter) {
-        super.setAdapter(adapter);
+    public boolean onInterceptTouchEvent(MotionEvent arg0) {
+        if (config.noScroll)
+            return false;
+        else
+            return super.onInterceptTouchEvent(arg0);
     }
+
 }
