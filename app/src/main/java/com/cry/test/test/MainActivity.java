@@ -1,8 +1,8 @@
 package com.cry.test.test;
 
-import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
+import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 
@@ -13,7 +13,7 @@ import com.cry.viewpagertable.ViewPagerTableBottomGroup;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends Activity {
+public class MainActivity extends AppCompatActivity {
     ViewPagerTable tableHost;
     ViewPagerTableBottomGroup table_bottom_group;
     @Override
@@ -34,6 +34,13 @@ public class MainActivity extends Activity {
         views.add(root2);
         views.add(root3);
         tableHost.setViewLayout(views);
+
+        /**
+        //设置Fragment
+        List<Fragment> fragments=new ArrayList<>();
+        tableHost.setViewLayoutFragment(getSupportFragmentManager(),fragments);
+        **/
+
         /*底部选择器选择状态改变侦听*/
         table_bottom_group.setOnViewPagerTableGroupChangeListener(new ViewPagerTableBottomGroup.OnViewPagerTableGroupChangeListener() {
             @Override

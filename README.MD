@@ -81,6 +81,12 @@
                           views.add(root2);
                           views.add(root3);
                           tableHost.setViewLayout(views);
+
+
+                   //设置Fragment
+                    List<Fragment> fragments=new ArrayList<>();
+                    tableHost.setViewLayoutFragment(getSupportFragmentManager(),fragments);
+
                   /*底部选择器选择状态改变侦听*/
                   table_bottom_group.setOnViewPagerTableGroupChangeListener(new ViewPagerTableBottomGroup.OnViewPagerTableGroupChangeListener() {
                       @Override
