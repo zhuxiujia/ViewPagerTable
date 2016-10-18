@@ -4,10 +4,10 @@ package com.cry.viewpagertable;
  * Created by zxj on 15/12/30.
  */
 public class Config {
-    public  int animation_time =300;
-    public  boolean enable_tableItemAnimation =true;
-    public  boolean isCanScroll=false;
-    public  boolean noScroll = true;
+    public int animation_time = 300;
+    public boolean enable_tableItemAnimation = true;
+    public boolean isCanScroll = false;
+    public boolean noScroll = true;
 
     public void setAnimation_time(int animation_time) {
         this.animation_time = animation_time;

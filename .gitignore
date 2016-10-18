@@ -10,3 +10,5 @@
 .bat
 gradlew
 .properties
+build
+.idea/runConfigurations.xml

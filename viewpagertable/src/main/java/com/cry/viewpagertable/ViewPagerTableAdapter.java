@@ -11,7 +11,7 @@ import java.util.List;
  * Created by zxj on 15/12/10.
  */
 public class ViewPagerTableAdapter extends PagerAdapter {
-    public List<View> viewList=new ArrayList<>();
+    public List<View> viewList = new ArrayList<>();
     ViewGroup cont = null;
 
     public List<View> getViewList() {
@@ -26,8 +26,6 @@ public class ViewPagerTableAdapter extends PagerAdapter {
             }
         } catch (Exception e) {
         }
-
-
         this.viewList = viewList;
     }
 
@@ -41,20 +39,20 @@ public class ViewPagerTableAdapter extends PagerAdapter {
 
 
     @Override
-    public Object instantiateItem(ViewGroup container, int position) {    //
+    public Object instantiateItem(ViewGroup container, int position) {
         this.cont = container;
-        container.addView(viewList.get(position), 0);//
+        container.addView(viewList.get(position), 0);
         return viewList.get(position);
     }
 
     @Override
     public int getCount() {
-        return viewList.size();//
+        return viewList.size();
     }
 
     @Override
     public boolean isViewFromObject(View arg0, Object arg1) {
-        return arg0 == arg1;//
+        return arg0 == arg1;
     }
 
     @Override

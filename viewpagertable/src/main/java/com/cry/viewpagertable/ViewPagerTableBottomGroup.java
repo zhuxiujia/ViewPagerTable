@@ -13,17 +13,19 @@ import java.util.List;
  * Created by zxj on 15/12/10.
  */
 public class ViewPagerTableBottomGroup extends LinearLayout {
-    final String TAG="Group";
-    List<ViewPagerTableItem> viewPagerTableItems =new ArrayList<>();
+    final String TAG = "Group";
+    List<ViewPagerTableItem> viewPagerTableItems = new ArrayList<>();
+
     private void init() {
         setOrientation(HORIZONTAL);
         setOnHierarchyChangeListener(new PassThroughHierarchyChangeListener());
     }
 
-    public static interface OnViewPagerTableGroupChangeListener{
+    public static interface OnViewPagerTableGroupChangeListener {
         void onGroupChange(int index);
     }
-    OnViewPagerTableGroupChangeListener onViewPagerTableGroupChangeListener=null;
+
+    OnViewPagerTableGroupChangeListener onViewPagerTableGroupChangeListener = null;
 
     public ViewPagerTableBottomGroup(Context context) {
         super(context);
@@ -52,9 +54,8 @@ public class ViewPagerTableBottomGroup extends LinearLayout {
     }
 
 
-
-    public void setChildChecked(int index){
-        if(index< viewPagerTableItems.size()){
+    public void setChildChecked(int index) {
+        if (index < viewPagerTableItems.size()) {
             for (int i = 0; i < viewPagerTableItems.size(); i++) {
                 if (i == index) {
                     viewPagerTableItems.get(i).setChecked(true);
@@ -64,7 +65,8 @@ public class ViewPagerTableBottomGroup extends LinearLayout {
                     //Log.i(TAG,"false:"+index);
                 }
             }
-            if(onViewPagerTableGroupChangeListener!=null)onViewPagerTableGroupChangeListener.onGroupChange(index);
+            if (onViewPagerTableGroupChangeListener != null)
+                onViewPagerTableGroupChangeListener.onGroupChange(index);
         }
     }
 
@@ -73,16 +75,20 @@ public class ViewPagerTableBottomGroup extends LinearLayout {
     }
 
 
-
-
     /**
      * <p>A pass-through listener acts upon the events and dispatches them
      * to another listener. This allows the table layout to set its own internal
      * hierarchy change listener without preventing the user to setup his.</p>
      */
+    int index = 0;//index of loaded view
+
     private class PassThroughHierarchyChangeListener implements
             OnHierarchyChangeListener {
-        int index=0;
+
+        public PassThroughHierarchyChangeListener() {
+            index = 0;
+        }
+
         /**
          * {@inheritDoc}
          */
@@ -96,17 +102,17 @@ public class ViewPagerTableBottomGroup extends LinearLayout {
                     }
                     child.setId(id);
                 }
-
-                final  int p=index;
                 viewPagerTableItems.add((ViewPagerTableItem) child);
-                viewPagerTableItems.get(p).setOnTouchUpListener(new ViewPagerTableItem.OnTouchUpListener() {
+                viewPagerTableItems.get(index).setOnTouchUpListener(new ViewPagerTableItem.OnTouchUpListener() {
                     @Override
                     public void onTouchUp() {
-                        setChildChecked(p);
+                        setChildChecked(index);
                     }
                 });
                 index++;
-                if(p==0){viewPagerTableItems.get(0).setChecked(true);}
+                if (index == 0) {
+                    viewPagerTableItems.get(0).setChecked(true);
+                }
             }
 
 
@@ -119,5 +125,6 @@ public class ViewPagerTableBottomGroup extends LinearLayout {
             if (parent == ViewPagerTableBottomGroup.this && child instanceof ViewPagerTableItem) {
                 ((ViewPagerTableItem) child).setOnCheckedChangeWidgetListener(null);
             }
-        }}
+        }
+    }
 }

@@ -15,7 +15,7 @@ import android.widget.TextView;
 /**
  * Created by zxj on 15/12/10.
  */
-public class ViewPagerTableItem extends RelativeLayout{
+public class ViewPagerTableItem extends RelativeLayout {
     final String TAG = getClass().getSimpleName();
     private ImageView imageView_up;
     private ImageView imageView_down;
@@ -23,20 +23,21 @@ public class ViewPagerTableItem extends RelativeLayout{
     private TextView textView_down;
     private boolean checked = false;
 
-    private int id_imageView_up =-1;
-    private int id_imageView_down =-1;
-    private int id_textView_up=-1;
-    private int id_textView_down=-1;
+    private int id_imageView_up = -1;
+    private int id_imageView_down = -1;
+    private int id_textView_up = -1;
+    private int id_textView_down = -1;
 
-    OnTouchUpListener onTouchUpListener=null;
-    OnCheckedChangeWidgetListener onCheckedChangeWidgetListener=null;
-    public  interface OnCheckedChangeWidgetListener{
+    OnTouchUpListener onTouchUpListener = null;
+    OnCheckedChangeWidgetListener onCheckedChangeWidgetListener = null;
+
+    public interface OnCheckedChangeWidgetListener {
         void change(boolean checked);
     }
 
 
-    public  interface OnTouchUpListener{
-         void onTouchUp();
+    public interface OnTouchUpListener {
+        void onTouchUp();
     }
 
     public ViewPagerTableItem(Context context) {
@@ -67,10 +68,10 @@ public class ViewPagerTableItem extends RelativeLayout{
     private void initAttrs(Context context, AttributeSet attrs) {
         try {
             TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.ViewPagerTableItem);
-            id_imageView_down =a.getResourceId(R.styleable.ViewPagerTableItem_imageview_down_id,-1);
-            id_imageView_up =a.getResourceId(R.styleable.ViewPagerTableItem_imageview_up_id,-1);
-            id_textView_up=a.getResourceId(R.styleable.ViewPagerTableItem_textview_up_id,-1);
-            id_textView_down=a.getResourceId(R.styleable.ViewPagerTableItem_textview_down_id,-1);
+            id_imageView_down = a.getResourceId(R.styleable.ViewPagerTableItem_imageview_down_id, -1);
+            id_imageView_up = a.getResourceId(R.styleable.ViewPagerTableItem_imageview_up_id, -1);
+            id_textView_up = a.getResourceId(R.styleable.ViewPagerTableItem_textview_up_id, -1);
+            id_textView_down = a.getResourceId(R.styleable.ViewPagerTableItem_textview_down_id, -1);
             a.recycle();
         } catch (Exception e) {
         }
@@ -97,7 +98,7 @@ public class ViewPagerTableItem extends RelativeLayout{
     @Override
     public boolean dispatchTouchEvent(MotionEvent ev) {
         if (ev.getAction() == MotionEvent.ACTION_UP) {
-            if(onTouchUpListener!=null)onTouchUpListener.onTouchUp();
+            if (onTouchUpListener != null) onTouchUpListener.onTouchUp();
             setChecked(true);
         }
         return super.dispatchTouchEvent(ev);
@@ -106,7 +107,7 @@ public class ViewPagerTableItem extends RelativeLayout{
     @Override
     protected void onLayout(boolean changed, int l, int t, int r, int b) {
         super.onLayout(changed, l, t, r, b);
-       //if(changed) findAllChildViews();
+        //if(changed) findAllChildViews();
 
     }
 
@@ -154,22 +155,24 @@ public class ViewPagerTableItem extends RelativeLayout{
                 textView_up.setAlpha(1f);
                 textView_down.setAlpha(0f);
             }
-        }catch (Exception e){}
+        } catch (Exception e) {
+        }
     }
 
 
     public void setChecked(boolean checked) {
-        if(this.checked!=checked) {
+        if (this.checked != checked) {
             this.checked = checked;
             invate();
-            if(onCheckedChangeWidgetListener!=null)onCheckedChangeWidgetListener.change(checked);
+            if (onCheckedChangeWidgetListener != null)
+                onCheckedChangeWidgetListener.change(checked);
         }
     }
 
     public void invate() {
         try {
-                TextViewAnimation(checked);
-                ImageViewAnimation(checked);
+            TextViewAnimation(checked);
+            ImageViewAnimation(checked);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -177,7 +180,7 @@ public class ViewPagerTableItem extends RelativeLayout{
     }
 
     private void ImageViewAnimation(boolean checked) {
-        if(ViewPagerTable.config.enable_tableItemAnimation) {
+        if (ViewPagerTable.config.enable_tableItemAnimation) {
             if (checked) {
                 ObjectAnimator.ofFloat(imageView_up, "alpha", 1, 0).setDuration(ViewPagerTable.config.animation_time).start();
                 ObjectAnimator.ofFloat(imageView_down, "alpha", 0, 1).setDuration(ViewPagerTable.config.animation_time).start();
@@ -185,7 +188,7 @@ public class ViewPagerTableItem extends RelativeLayout{
                 ObjectAnimator.ofFloat(imageView_up, "alpha", 0, 1).setDuration(ViewPagerTable.config.animation_time).start();
                 ObjectAnimator.ofFloat(imageView_down, "alpha", 1, 0).setDuration(ViewPagerTable.config.animation_time).start();
             }
-        }else {
+        } else {
             if (checked) {
                 imageView_up.setAlpha(0f);
                 imageView_down.setAlpha(1f);
@@ -197,7 +200,7 @@ public class ViewPagerTableItem extends RelativeLayout{
     }
 
     private void TextViewAnimation(boolean checked) {
-        if(ViewPagerTable.config.enable_tableItemAnimation) {
+        if (ViewPagerTable.config.enable_tableItemAnimation) {
             if (checked) {
                 ObjectAnimator.ofFloat(textView_up, "alpha", 1, 0).setDuration(ViewPagerTable.config.animation_time).start();
                 ObjectAnimator.ofFloat(textView_down, "alpha", 0, 1).setDuration(ViewPagerTable.config.animation_time).start();
@@ -205,7 +208,7 @@ public class ViewPagerTableItem extends RelativeLayout{
                 ObjectAnimator.ofFloat(textView_up, "alpha", 0, 1).setDuration(ViewPagerTable.config.animation_time).start();
                 ObjectAnimator.ofFloat(textView_down, "alpha", 1, 0).setDuration(ViewPagerTable.config.animation_time).start();
             }
-        }else {
+        } else {
             if (checked) {
                 textView_up.setAlpha(0f);
                 textView_down.setAlpha(1f);

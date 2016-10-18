@@ -10,12 +10,13 @@ import java.util.List;
  * Created by zhuxiujie on 16/7/11.
  */
 
-public class FragmentAdapter extends FragmentStatePagerAdapter{
+public class FragmentAdapter extends FragmentStatePagerAdapter {
 
     List<Fragment> list;
+
     public FragmentAdapter(FragmentManager fm, List<Fragment> list) {
         super(fm);
-        this.list=list;
+        this.list = list;
     }
 
     @Override

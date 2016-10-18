@@ -9,8 +9,7 @@
         android:id="@+id/tablehost"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:layout_marginBottom="60dp">
-    </com.cry.viewpagertable.ViewPagerTable>
+        android:layout_marginBottom="60dp"></com.cry.viewpagertable.ViewPagerTable>
 
     <com.cry.viewpagertable.ViewPagerTableBottomGroup
         android:id="@+id/button_group"
@@ -19,9 +18,13 @@
         android:layout_marginTop="-60dp"
         tools:ignore="DuplicateIds"
         android:orientation="horizontal">
+
         <include layout="@layout/viewpagertableitem"></include>
+
         <include layout="@layout/viewpagertableitem"></include>
+
         <include layout="@layout/viewpagertableitem"></include>
+
         <include layout="@layout/viewpagertableitem"></include>
     </com.cry.viewpagertable.ViewPagerTableBottomGroup>
 </LinearLayout>

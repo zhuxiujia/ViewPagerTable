@@ -14,9 +14,9 @@ import java.util.List;
 /**
  * Created by zxj on 15/12/10.
  */
-public class ViewPagerTable extends ViewPager{
-    public static Config config=new Config();
-   final   ViewGroup.LayoutParams layoutparams= new ViewGroup.LayoutParams(ViewGroup.LayoutParams.FILL_PARENT, ViewGroup.LayoutParams.FILL_PARENT);
+public class ViewPagerTable extends ViewPager {
+    public static Config config = new Config();
+    final ViewGroup.LayoutParams layoutparams = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.FILL_PARENT, ViewGroup.LayoutParams.FILL_PARENT);
 
     public ViewPagerTable(Context context) {
         super(context);
@@ -30,18 +30,20 @@ public class ViewPagerTable extends ViewPager{
 
     private void init() {
     }
-    public void setConfig(Config config){
-        ViewPagerTable.config=config;
+
+    public void setConfig(Config config) {
+        ViewPagerTable.config = config;
     }
 
-    public void setViewLayout(List<View> layouts){
-        ViewPagerTableAdapter viewPagerTableAdapter =new ViewPagerTableAdapter();
+    public void setViewLayout(List<View> layouts) {
+        ViewPagerTableAdapter viewPagerTableAdapter = new ViewPagerTableAdapter();
         setAdapter(viewPagerTableAdapter);
         viewPagerTableAdapter.setViewList(layouts);
         viewPagerTableAdapter.notifyDataSetChanged();
     }
-    public void setViewLayoutFragment(FragmentManager fm, List<Fragment> layouts){
-        FragmentAdapter viewPagerTableAdapter =new FragmentAdapter(fm,layouts);
+
+    public void setViewLayoutFragment(FragmentManager fm, List<Fragment> layouts) {
+        FragmentAdapter viewPagerTableAdapter = new FragmentAdapter(fm, layouts);
         setAdapter(viewPagerTableAdapter);
         viewPagerTableAdapter.notifyDataSetChanged();
     }
